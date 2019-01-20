@@ -1,0 +1,1 @@
+window.onload=function(){var a=new dbxManager("main");var b=new dbxGroup("sidebar","vertical","7","no","10","yes","open","open","close","click-down and drag to move this box","click to %toggle% this box","use the arrow keys to move this box",", or press the enter key to %toggle% it","%mytitle%  [%dbxtitle%]")};

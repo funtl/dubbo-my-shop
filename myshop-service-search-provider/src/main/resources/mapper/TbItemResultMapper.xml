@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funtl.myshop.service.search.provider.mapper.TbItemResultMapper">
+  <resultMap id="BaseResultMap" type="com.funtl.myshop.service.search.domain.TbItemResult">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tb_item_cid" jdbcType="BIGINT" property="tbItemCid" />
+    <result column="tb_item_cname" jdbcType="VARCHAR" property="tbItemCname" />
+    <result column="tb_item_title" jdbcType="VARCHAR" property="tbItemTitle" />
+    <result column="tb_item_sell_point" jdbcType="VARCHAR" property="tbItemSellPoint" />
+    <result column="tb_item_desc" jdbcType="VARCHAR" property="tbItemDesc" />
+  </resultMap>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+      a.id,
+      a.title as tb_item_title,
+      a.sell_point as tb_item_sell_point,
+      a.cid as tb_item_cid,
+      b.name as tb_item_cname,
+      c.item_desc as tb_item_desc
+    from
+      tb_item as a
+      left join tb_item_cat as b
+        on a.cid = b.id
+      left join tb_item_desc as c
+        on a.id = c.item_id
+  </select>
+</mapper>

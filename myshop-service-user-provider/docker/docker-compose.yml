@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  myshop-service-user-provider:
+    image: 192.168.10.133:5000/myshop-service-user-provider:v1.0.0
+    container_name: myshop-service-user-provider
+    ports:
+      - 8501:8501
+      - 22222:22222
+      - 20881:20881
+
+networks:
+  default:
+    external:
+      name: dubbo

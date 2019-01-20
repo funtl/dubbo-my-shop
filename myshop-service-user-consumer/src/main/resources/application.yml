@@ -1,0 +1,78 @@
+# Spring boot application
+spring:
+  application:
+    name: myshop-service-user-consumer
+  thymeleaf:
+    cache: false # 开发时关闭缓存,不然没法看到实时页面
+    mode: LEGACYHTML5 # 用非严格的 HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+server:
+  port: 8601
+
+# Services Versions
+services:
+  versions:
+    user:
+      v1: 1.0.0
+
+# Dubbo Config properties
+dubbo:
+  scan:
+    basePackages: com.funtl.myshop.service.user.consumer
+  ## ApplicationConfig Bean
+  application:
+    id: myshop-service-user-consumer
+    name: myshop-service-user-consumer
+  ## ProtocolConfig Bean
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 30881
+    status: server
+    serialization: kryo
+  ## RegistryConfig Bean
+  registry:
+    id: zookeeper
+    address: zookeeper://192.168.10.131:2181?backup=192.168.10.131:2182,192.168.10.131:2183
+
+# Dubbo Endpoint (default status is disable)
+endpoints:
+  dubbo:
+    enabled: true
+
+management:
+  server:
+    port: 8701
+  # Dubbo Health
+  health:
+    dubbo:
+      status:
+        ## StatusChecker Name defaults (default : "memory", "load" )
+        defaults: memory
+  # Enables Dubbo All Endpoints
+  endpoint:
+    dubbo:
+      enabled: true
+    dubbo-shutdown:
+      enabled: true
+    dubbo-configs:
+      enabled: true
+    dubbo-services:
+      enabled: true
+    dubbo-references:
+      enabled: true
+    dubbo-properties:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Apollo
+apollo:
+  bootstrap:
+    enabled: true
+    # will inject 'application' and 'TEST1.apollo' namespaces in bootstrap phase
+    namespaces: application
